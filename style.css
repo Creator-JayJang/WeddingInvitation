@@ -293,16 +293,26 @@ body{
   pointer-events: none;
 }
 
-/* 타이포 밴드 — 높이 32% 고정. inset 은 --hero-unit 이 폰트에서 흡수한다.
-   overflow:hidden 은 마지막 안전망이며 정상 동작에서는 발동하지 않는다
-   (최악값 320×568 에서도 여유 +17.8px, 텍스트 실하단 최대 28.9%). */
+/* 타이포 밴드 — 5차 미세 조정: 밴드 내 **하단 정렬**.
+   사용자: "글이 너무 위쪽에 가 있어서, 얼굴 간섭이 없을 정도로만 적당히 아래로."
+
+   고정 높이 박스(height + overflow:hidden) 대신 **블록 하단을 32% 선에 못 박는다**.
+   · bottom: calc(100% - var(--hero-band)) → 하단 경계가 항상 32%. 높이는 콘텐츠에 맡긴다.
+   · 따라서 텍스트가 32% 선 아래(=얼굴 쪽)로 내려가는 일이 **구조적으로 불가능**하다.
+     고정 높이 + flex-end 조합이었다면 콘텐츠가 넘칠 때 위쪽(=성명)부터 잘리는데,
+     하단 고정 방식은 넘쳐도 위쪽 빈 블러시 벽으로 자라기만 하므로 성명이 안전하다.
+     이 때문에 .hero__type 의 overflow:hidden 을 제거했다(얼굴 보호는 bottom 고정이 담당).
+   · padding-bottom 은 32% 선에서 띄우는 안전 간격. 경계에 시각 요소가 없으므로 px 고정보다
+     비율이 합리적이다 — 1svh 로 두면 텍스트 하단이 전 기기에서 균일하게 약 31% 가 된다.
+   · inset 은 --hero-unit 폰트 보정이 계속 흡수한다. 하단 정렬이라 inset 은 위쪽 여백만
+     먹으므로 노치 안전성은 오히려 좋아졌다(상단 여유가 곧 노치 클리어런스). */
 .hero__type{
   position: absolute;
-  inset: 0 0 auto 0;
-  height: var(--hero-band);
-  padding-top: var(--safe-top);
+  left: 0; right: 0;
+  bottom: calc(100% - var(--hero-band));
+  padding-bottom: max(6px, 1vh);
+  padding-bottom: max(6px, 1svh);
   padding-inline: max(24px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
-  overflow: hidden;
   text-align: center;
   color: var(--hero-text);
 }
@@ -348,12 +358,13 @@ body{
 @media (orientation: landscape) and (max-height: 560px){
   :root{ --fs-hero-name: clamp(22px, 4.2vw, 30px); }
   .hero__type{
-    inset: 0 auto 0 0;
+    inset: 0 auto 0 0;              /* bottom:0 이 세로 모드의 하단 고정을 덮는다 */
     width: 42%;
     height: auto;
     display: flex; flex-direction: column; justify-content: center;
     text-align: left;
     padding-top: 0;
+    padding-bottom: 0;              /* 세로 중앙 정렬이라 하단 안전 간격이 필요 없다 */
     padding-left: max(20px, env(safe-area-inset-left, 0px));
   }
   .hero__scrim{ inset: 0; height: auto; background: linear-gradient(90deg, rgba(253,251,247,.45) 0%, rgba(253,251,247,.08) 55%, transparent 100%); }
