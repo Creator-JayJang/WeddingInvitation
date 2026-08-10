@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- 확대 제한 속성을 넣지 않는다 — 시스템 글자 확대·핀치 줌을 막으면 안 된다 (컨셉 시트 타입 스케일 규칙 5) -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>장재준 ♥ 심혜은 — 2026.10.31 결혼합니다</title>
+<meta name="description" content="장재준 심혜은의 결혼식에 귀한 걸음 부탁드립니다. 2026년 10월 31일 토요일 오후 1시 20분, 전주 더메이 호텔 2층 그랜드볼룸홀.">
+<meta name="theme-color" content="#FDFBF7">
+<!-- 검색엔진 노출 방지 — 하객은 링크로 직접 접속하므로 영향 없음 -->
+<meta name="robots" content="noindex">
+
+<!-- ── Open Graph / 카카오톡 공유 ───────────────────────────────────────────
+     배포 도메인 치환 완료 (2026-08-10): creator-jayjang.github.io/WeddingInvitation
+     og:image 는 반드시 절대 URL 이어야 한다(상대경로 불가). -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="장재준 ♥ 심혜은 결혼합니다">
+<meta property="og:title" content="장재준 ♥ 심혜은 결혼합니다">
+<meta property="og:description" content="2026년 10월 31일 토요일 오후 1시 20분 · 전주 더메이 호텔 그랜드볼룸">
+<meta property="og:url" content="https://creator-jayjang.github.io/WeddingInvitation/">
+<meta property="og:image" content="https://creator-jayjang.github.io/WeddingInvitation/images/photos/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://creator-jayjang.github.io/WeddingInvitation/images/photos/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="장재준 심혜은 모바일 청첩장 — 2026년 10월 31일">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="장재준 ♥ 심혜은 결혼합니다">
+<meta name="twitter:description" content="2026년 10월 31일 토요일 오후 1시 20분 · 전주 더메이 호텔 그랜드볼룸">
+<meta name="twitter:image" content="https://creator-jayjang.github.io/WeddingInvitation/images/photos/og-cover.jpg">
+
+<!-- ── LCP: 히어로 이미지 선로딩 ───────────────────────────────────────── -->
+<link rel="preload" as="image" href="images/photos/hero.jpg" fetchpriority="high">
+
+<!-- ── Fonts (컨셉 시트 typography 5종 — Source Serif 4 는 숫자 전용) ──── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&family=Pinyon+Script&family=Source+Serif+4:wght@400;600&display=swap">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- 리빌 안전장치: JS가 살아있을 때만 요소를 숨긴다 (모션 명세 §2-0) -->
+<script>document.documentElement.classList.add('js-on');</script>
+</head>
+<body>
+
+<!-- ══ BGM 토글 ═══════════════════════════════════════════════════════════
+     WCAG 1.4.2 (Audio Control): 자동 재생되는 오디오의 정지 수단은 페이지 시작
+     부분에서 접근 가능해야 한다. 그래서 이 버튼을 <main> 보다 앞에 둔다.
+     (시각 위치는 CSS position:fixed 로 우상단)                            -->
+<button id="bgm-toggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="배경 음악 재생">
+  <span class="bgm-toggle__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18V5l10-2v13"></path>
+      <circle cx="6.5" cy="18" r="2.5"></circle>
+      <circle cx="16.5" cy="16" r="2.5"></circle>
+      <line class="bgm-toggle__slash" x1="3" y1="21" x2="21" y2="3"></line>
+    </svg>
+  </span>
+  <span class="eq" aria-hidden="true"><i class="eq-bar"></i><i class="eq-bar"></i><i class="eq-bar"></i></span>
+</button>
+<p id="bgm-tip" class="bgm-tip" role="note" hidden>배경 음악이 함께 재생됩니다. 오른쪽 위에서 끄실 수 있습니다.</p>
+<!-- 음원: audio/bgm.mp3 (4.0MB). preload="metadata" 로 시작해 window.load 이후 'auto' 로 승격한다.
+     autoplay 속성은 쓰지 않는다 — 스크립트로 제어해야 Promise 를 잡고 폴백을 걸 수 있다. -->
+<audio id="bgm" src="audio/bgm.mp3" loop preload="metadata"></audio>
+
+<main class="card">
+
+  <!-- ══ 1. HERO ═════════════════════════════════════════════════════════
+       4차 최종 — 풀스크린 사진 오버레이 + 상단 32% 타이포 밴드 + 축소 타이포.
+       3차의 세로 분할(타이포 스트립 + 무크롭 사진) 구조는 철회됐다.
+       사용자: "처음 대문 사진과 글이 함께 있는 게 좋았는데 왜 나눠버렸어.
+                얼굴을 가린다면 글자를 줄여줘."
+       → 해법은 레이아웃 분리가 아니라 타이포 축소. 밴드는 32%로 고정하고 그 안에
+         들어가도록 폰트를 줄여, 사진 상단 35% 인물 시작선을 어떤 기기에서도 넘지 않는다.
+       ⚠ Ken Burns 재도입 금지 — 확대는 인물 프레이밍을 흔들어 원 피드백을 재발시킨다.
+         진입 모션은 opacity 전용 2트랙(모션 명세 rev.4 §2-1)만 유지한다.            -->
+  <section class="hero" aria-label="청첩장 표지">
+    <!-- hero.jpg = 1280×1920 (2:3). 세로 뷰포트에서 cover 는 좌우를 자르고 상하를 보존하므로
+         상단의 빈 블러시 벽이 온전히 남는다 — 타이포가 놓이는 자리다. -->
+    <img class="hero__photo" src="images/photos/hero.jpg"
+         alt="블러시 톤 벽 앞에 나란히 선 신랑 장재준과 신부 심혜은"
+         width="1280" height="1920"
+         fetchpriority="high" loading="eager" decoding="sync">
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="hero__type">
+      <!-- stagger delay 는 모션 명세 rev.4 §2-1 트랙 B 표의 확정값이다
+           (0 / 160 / 260 / 480 / 640 / 1000ms — 전체 정착 약 1900ms).
+           보조 영문 줄은 명세 표에 없는 요소이고 4차 레이아웃에서 장소 줄 '아래'로
+           내려왔으므로, 위 행보다 먼저 뜨지 않게 640ms 다음인 720ms 로 둔다. -->
+      <h1 class="hero__names">
+        <span class="hero__name" style="--d:0ms">JAEJUN JANG</span>
+        <span class="hero__amp" style="--d:160ms">&amp;</span>
+        <span class="hero__name" style="--d:260ms">HYEEUN SHIM</span>
+      </h1>
+      <p class="hero__date num" style="--d:480ms">2026 . 10 . 31</p>
+      <p class="hero__venue" style="--d:640ms">전주 더메이 호텔 2층 그랜드볼룸홀</p>
+      <p class="hero__aux" style="--d:720ms">SATURDAY, 31 OCTOBER 2026</p>
+    </div>
+
+    <!-- 스크롤 인디케이터는 밴드 밖 · 뷰포트 하단 고정(모션 명세 원위치).
+         사진 하단은 드레스·구두 영역이라 얼굴을 가리지 않는다. -->
+    <div class="scroll-indicator" style="--d:1000ms" aria-hidden="true">
+      <span class="scroll-indicator__line"></span>
+      <svg viewBox="0 0 16 10" width="14" height="9" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l7 7 7-7"></path></svg>
+    </div>
+  </section>
+
+
+  <!-- ══ 2. OUR STORY (모시는 글 흡수) ═══════════════════════════════════ -->
+  <section class="section story" aria-labelledby="story-head">
+    <img class="ornament" src="images/ornament-corner.png" alt="" aria-hidden="true" width="512" height="512" loading="lazy" decoding="async">
+
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="story-head">OUR LOVE STORY</h2>
+      <p class="sec-head__ko">우리의 이야기</p>
+    </header>
+
+    <p class="story__lead reveal" style="--i:1">캠퍼스에서 시작해, 다섯 해를 지나</p>
+
+    <div class="story__body">
+      <p class="reveal" style="--i:2">학생 시절 캠퍼스에서 만나<br>풋풋한 인연을 맺은 두 사람이<br>이제는 같은 직장에서<br>나란히 걷게 되었습니다.</p>
+      <p class="reveal" style="--i:3">듬직한 삼형제의 첫째 아들과<br>세상을 환하게 만드는<br>세 자매의 막내딸이 만나<br>하나의 가정을 이룹니다.</p>
+      <!-- <p class="reveal" style="--i:4">바쁘신 중에 귀한 시간 내어<br>저희의 새로운 시작을<br>함께해 주시면 더없는 기쁨으로 간직하겠습니다.</p> -->
+      <!-- <p class="reveal" style="--i:5">돌아보면 그 시간의 마디마다<br>저희 곁에 여러분이 계셨습니다.</p> -->
+    </div>
+
+    <!-- 타임라인(2021/2026)은 만남 연도가 확정 정보가 아니므로 렌더링하지 않는다.
+         실제 연도 확인 후 노출 여부를 결정할 것 — 카피 시트 our_story 주석 참조. -->
+
+    <!-- 이 자리에 있던 신부 단독 포인트 컷은 2026-08-10 자산에서 삭제됐다(매니페스트 rev.3).
+         사진 없이 헤어라인 디바이더만으로 호흡을 만든다. -->
+    <hr class="hairline reveal" style="--i:6">
+
+    <!-- 모시는 글 — 삭제된 인사말 섹션을 대신하는 블록.
+         별도 섹션으로 분리하지 말 것(컨셉 시트 금지 사항 8). -->
+    <div class="story__invite reveal" style="--i:7">
+      <!-- <p class="story__invite-lead">이제 그 자리를<br>평생의 약속으로 옮겨 두려 합니다.</p> -->
+      <p>2026년 10월 31일,<br>저희 두 사람이 부부로서<br>첫걸음을 내딛습니다.</p>
+      <p>귀한 걸음으로 함께해 주신다면<br>더없는 기쁨으로 간직하겠습니다.</p>
+    </div>
+  </section>
+
+
+  <img class="divider reveal reveal--x" src="images/divider-floral-1.png" alt="" aria-hidden="true" width="1600" height="500" loading="lazy" decoding="async">
+
+
+  <!-- ══ 3. COUPLE INTRO ═════════════════════════════════════════════════ -->
+  <section class="section section--tint couple" aria-labelledby="couple-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="couple-head">GROOM &amp; BRIDE</h2>
+      <p class="sec-head__ko">신랑 · 신부</p>
+    </header>
+
+    <div class="couple__grid">
+      <div class="couple__person reveal" style="--i:1">
+        <p class="couple__parents">장영일 · 손순화</p>
+        <p class="couple__rel">의 장남</p>
+        <p class="couple__name">장재준</p>
+      </div>
+
+      <div class="couple__rule reveal" style="--i:2" aria-hidden="true"></div>
+
+      <div class="couple__person reveal" style="--i:3">
+        <p class="couple__parents">심봉섭 · 민경란</p>
+        <p class="couple__rel">의 막내딸</p>
+        <p class="couple__name">심혜은</p>
+      </div>
+    </div>
+    <!-- 연락처(전화/문자·혼주 연락처) 요소는 사용자 지시로 삭제되었다.
+         컨셉 시트 금지 사항 8 — 부활시키지 말 것. -->
+  </section>
+
+
+  <!-- ══ 4. CALENDAR + D-DAY ═════════════════════════════════════════════ -->
+  <section class="section calendar" aria-labelledby="calendar-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="calendar-head">WEDDING DATE</h2>
+      <p class="sec-head__ko">예식일</p>
+    </header>
+
+    <p class="cal__month reveal" style="--i:1"><span class="num">2026</span>년 <span class="num">10</span>월<span class="cal__month-en">OCTOBER 2026</span></p>
+
+    <table class="cal num reveal" style="--i:1">
+      <caption class="sr-only">2026년 10월 달력 — 31일 토요일이 예식일입니다</caption>
+      <thead>
+        <tr><th scope="col">일</th><th scope="col">월</th><th scope="col">화</th><th scope="col">수</th><th scope="col">목</th><th scope="col">금</th><th scope="col">토</th></tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+        <tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr>
+        <tr><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr>
+        <tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td class="cal__day"><span class="cal__mark reveal reveal--fade" style="--i:2.4">31</span></td></tr>
+      </tbody>
+    </table>
+
+    <p class="cal__caption reveal" style="--i:2"><span class="num">2026</span>년 <span class="num">10</span>월 <span class="num">31</span>일 토요일 오후 <span class="num">1</span>시 <span class="num">20</span>분<br>전주 더메이 호텔 2층 그랜드볼룸홀</p>
+
+    <div class="countdown reveal" style="--i:3" data-cd-target="2026-10-31T13:20:00+09:00">
+      <p class="countdown__lead" data-cd-state="before">장재준 · 심혜은의 결혼식까지</p>
+      <p class="countdown__lead" data-cd-state="dday" hidden>오늘, 저희 두 사람이<br>같은 길의 첫걸음을 내딛습니다.</p>
+      <p class="countdown__lead" data-cd-state="after" hidden>함께 걸어가는 <span class="num" data-cd="after-days">0</span>번째 날입니다.<br>끝까지 축복해 주셔서 감사합니다.</p>
+
+      <ul class="countdown__units" aria-hidden="true">
+        <li><span class="cd-num num" data-cd="days">--</span><span class="cd-label">일</span></li>
+        <li><span class="cd-num num" data-cd="hours">--</span><span class="cd-label">시간</span></li>
+        <li><span class="cd-num num" data-cd="minutes">--</span><span class="cd-label">분</span></li>
+        <li><span class="cd-num num" data-cd="seconds">--</span><span class="cd-label">초</span></li>
+      </ul>
+      <p class="sr-only">2026년 10월 31일 토요일 오후 1시 20분, 전주 더메이 호텔 2층 그랜드볼룸홀</p>
+    </div>
+  </section>
+
+
+  <!-- ══ 5. GALLERY ══════════════════════════════════════════════════════ -->
+  <section class="section section--tint gallery" aria-labelledby="gallery-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="gallery-head">GALLERY</h2>
+      <p class="sec-head__ko">웨딩 갤러리</p>
+    </header>
+
+    <p class="gallery__lead reveal" style="--i:0">우리의 빛나는 순간들을<br>한 장씩 모아 두었습니다.</p>
+    <p class="gallery__hint reveal" style="--i:0" id="gallery-hint">사진을 옆으로 넘겨 보세요. 누르면 크게 볼 수 있습니다.</p>
+
+    <div class="gallery__frame reveal" style="--i:1">
+      <ul class="gallery-track" id="gallery-track">
+        <li><button class="gallery-item" type="button" aria-label="순백의 창가에서 신부가 신랑을 돌아보는 모습 — 사진 1 크게 보기"><img src="images/photos/gallery-01.jpg" alt="순백의 창가에서 신부가 신랑을 돌아보는 모습" width="1067" height="1600" loading="eager" decoding="async" fetchpriority="low"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="파우더룸에서 신랑이 신부를 뒤에서 안고 있는 모습 — 사진 2 크게 보기"><img src="images/photos/gallery-02.jpg" alt="파우더룸에서 신랑이 신부를 뒤에서 안고 있는 모습" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="흰 소파에 앉아 부케를 든 신랑과 신부의 정면 사진 — 사진 3 크게 보기"><img src="images/photos/gallery-03.jpg" alt="흰 소파에 앉아 부케를 든 신랑과 신부의 정면 사진" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="칼라 백합 부케를 든 신부의 뒷모습 — 사진 4 크게 보기"><img src="images/photos/gallery-04.jpg" alt="칼라 백합 부케를 든 신부의 뒷모습" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="연한 블루 벽 앞에 나란히 앉은 신랑과 신부 — 사진 5 크게 보기"><img src="images/photos/gallery-05.jpg" alt="연한 블루 벽 앞에 나란히 앉은 신랑과 신부" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="샹들리에가 있는 홀에서 나란히 선 신랑과 신부의 전신 사진 — 사진 6 크게 보기"><img src="images/photos/gallery-06.jpg" alt="샹들리에가 있는 홀에서 나란히 선 신랑과 신부의 전신 사진" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="정원 아치 앞에 선 신랑과 신부의 전신 사진 — 사진 7 크게 보기"><img src="images/photos/gallery-07.jpg" alt="정원 아치 앞에 선 신랑과 신부의 전신 사진" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="정원 분수 옆 티테이블에 앉은 신랑과 신부 — 사진 8 크게 보기"><img src="images/photos/gallery-08.jpg" alt="정원 분수 옆 티테이블에 앉은 신랑과 신부" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="들꽃 사이에서 서로를 마주 보는 신랑과 신부 — 사진 9 크게 보기"><img src="images/photos/gallery-09.jpg" alt="들꽃 사이에서 서로를 마주 보는 신랑과 신부" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="황금빛 노을 아래 무릎을 꿇고 프러포즈하는 신랑 — 사진 10 크게 보기"><img src="images/photos/gallery-10.jpg" alt="황금빛 노을 아래 무릎을 꿇고 프러포즈하는 신랑" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="하늘을 배경으로 마주 보며 웃는 신랑과 신부 — 사진 11 크게 보기"><img src="images/photos/gallery-11.jpg" alt="하늘을 배경으로 마주 보며 웃는 신랑과 신부" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="노을빛 아래 베일을 쓰고 입 맞추는 신랑과 신부 — 사진 12 크게 보기"><img src="images/photos/gallery-12.jpg" alt="노을빛 아래 베일을 쓰고 입 맞추는 신랑과 신부" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="거울에 결혼 날짜를 적어 둔 비하인드 사진 — 사진 13 크게 보기"><img src="images/photos/gallery-13.jpg" alt="거울에 결혼 날짜를 적어 둔 비하인드 사진" width="1600" height="1067" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="검은 튤 드레스를 입고 경쾌하게 움직이는 신부와 신랑 — 사진 14 크게 보기"><img src="images/photos/gallery-14.jpg" alt="검은 튤 드레스를 입고 경쾌하게 움직이는 신부와 신랑" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+        <li><button class="gallery-item" type="button" aria-label="꽃가루가 흩날리는 문 앞에서 축하를 받는 신랑과 신부 — 사진 15 크게 보기"><img src="images/photos/gallery-15.jpg" alt="꽃가루가 흩날리는 문 앞에서 축하를 받는 신랑과 신부" width="1067" height="1600" loading="lazy" decoding="async"></button></li>
+      </ul>
+
+      <button class="gallery-nav gallery-nav--prev" type="button" aria-label="이전 사진" aria-controls="gallery-track">
+        <svg viewBox="0 0 12 20" width="12" height="20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 1L2 10l8 9"></path></svg>
+      </button>
+      <button class="gallery-nav gallery-nav--next" type="button" aria-label="다음 사진" aria-controls="gallery-track">
+        <svg viewBox="0 0 12 20" width="12" height="20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 1l8 9-8 9"></path></svg>
+      </button>
+    </div>
+
+    <p class="gallery-counter num reveal" style="--i:2" aria-live="off">
+      <span data-gal-current>1</span> <span class="sep">/</span> <span data-gal-total>15</span>
+    </p>
+  </section>
+
+
+  <img class="divider reveal reveal--x" src="images/divider-floral-1.png" alt="" aria-hidden="true" width="1600" height="500" loading="lazy" decoding="async">
+
+
+  <!-- ══ 6. VENUE ════════════════════════════════════════════════════════ -->
+  <section class="section venue" aria-labelledby="venue-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="venue-head">LOCATION</h2>
+      <p class="sec-head__ko">오시는 길</p>
+    </header>
+
+    <!-- 카카오맵 임베드. SDK 는 venue 섹션이 화면에 가까워질 때만 지연 로드한다.
+         ⚠ 폴백 필수: 카카오 개발자 콘솔에 배포 도메인이 등록되지 않았거나 SDK 로드가
+           실패하면 지도는 뜨지 않는다. 그때도 아래 안내 카드와 지도 앱 버튼들이
+           그대로 동작해야 하며, 페이지가 깨지거나 빈 박스가 남아서는 안 된다. -->
+    <div class="venue-map reveal" style="--i:1">
+      <div class="venue-map__frame" id="map-frame">
+        <div id="map" class="venue-map__canvas" aria-hidden="true" tabindex="-1"></div>
+        <!-- 지도는 draggable:false 로 잠근 상태로 시작한다. 잠그지 않으면 240px 지도 영역에서
+             세로 스와이프가 페이지 스크롤 대신 지도 팬으로 먹혀 하객이 중간에 갇힌다.
+             이 오버레이를 탭하면 드래그·줌이 열린다(1회성, 재잠금 없음).
+             지도 로드가 성공했을 때만 노출된다 — 실패 시엔 안내 카드가 그 자리에 남는다. -->
+        <button class="map-unlock" id="map-unlock" type="button" hidden>지도 확대 · 이동</button>
+        <div class="venue-map__ph" id="map-fallback">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.4"></circle></svg>
+          <p class="venue-map__title">전주 더메이 호텔</p>
+          <p class="venue-map__sub">아래 버튼으로 지도 앱에서 위치를 확인하실 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="venue__addr reveal" style="--i:2">
+      <p class="venue__name">전주 더메이 호텔 2층 그랜드볼룸홀</p>
+      <p class="venue__street">전북 전주시 덕진구 기린대로 <span class="tnum">800</span></p>
+    </div>
+
+    <div class="venue__actions">
+      <a class="btn btn--map reveal" style="--i:3; --stagger:80ms" href="https://map.kakao.com/link/search/%EC%A0%84%EC%A3%BC%20%EB%8D%94%EB%A9%94%EC%9D%B4%ED%98%B8%ED%85%94" target="_blank" rel="noopener noreferrer">카카오맵</a>
+      <a class="btn btn--map reveal" style="--i:4; --stagger:80ms" href="https://map.naver.com/v5/search/%EC%A0%84%EC%A3%BC%20%EB%8D%94%EB%A9%94%EC%9D%B4%ED%98%B8%ED%85%94" target="_blank" rel="noopener noreferrer">네이버지도</a>
+      <button class="btn btn--map reveal" style="--i:5; --stagger:80ms" type="button" data-copy="전북 전주시 덕진구 기린대로 800" data-toast="주소가 복사되었습니다." data-label-ready="주소 복사">주소 복사</button>
+    </div>
+    <!-- T map 버튼은 생략했다: 티맵 웹 폴백이 좌표(lat/lon) 없이는 동작하지 않아
+         앱 미설치 사용자에게 무반응 버튼이 된다. 좌표 확보 시 여기에 추가할 것. -->
+
+    <p class="venue__note reveal" style="--i:5">예식은 오후 <span class="num">1</span>시 <span class="num">20</span>분에 시작됩니다.<br>조금 여유 있게 도착해 주시면<br>편안히 함께하실 수 있습니다.</p>
+
+    <!-- ── 교통 4블록 (카피 rev.3 확정 순서: 버스 → 자가용·주차 → 택시 → 기차·고속버스) ──
+         ⚠ 버스·택시 블록의 대괄호 표기는 **의도적으로 화면에 노출**한다.
+            카피 rev.3이 "값 없으면 숨김" 규칙의 예외로 지정했다 — 사용자가 정보의 완결성보다
+            교통 안내의 '구조가 보이는 것'을 먼저 요구했기 때문이다.
+         ⚠ 노선번호·정류장명·소요 시간은 웹 검증에 실패했다. **추측값을 절대 채우지 말 것** —
+            잘못된 값은 하객을 엉뚱한 곳으로 보내는 실제 피해가 된다.
+         ※ 전주시에는 도시철도가 없으므로 '지하철' 항목을 만들지 않는다.
+         ※ 셔틀버스는 이 예외의 대상이 아니다(운행 여부 미정 → 비노출).            -->
+    <div class="transport">
+      <div class="transport__item reveal" style="--i:0">
+        <h3 class="transport__title"><span class="transport__ico" aria-hidden="true">🚌</span>버스</h3>
+        <p>휴비스 전주공장 정류장 하차 (도보 <span class="tnum">5</span>분)</p>
+        <p class="transport__sub tnum">101, 103-2, 337, 383, 385, 386, 401, 402, 403, 420</p>
+        <!-- 노선번호·정류장명은 사용자가 직접 입력한 값이다(2026-08-10).
+             카피 시트는 이 값들을 "웹 검증 실패 → 지어내지 말 것"으로 두고 대괄호 노출을
+             지시하지만, 그 규칙은 에이전트의 추측을 막기 위한 것이므로 예식장을 아는
+             사용자가 채운 값에는 적용하지 않는다. 다만 잘못된 노선은 하객이 엉뚱한 곳으로
+             가는 실제 피해가 되므로, 배포 전 한 번 더 대조해 주시기를 권한다. -->
+      </div>
+
+      <div class="transport__item reveal" style="--i:1">
+        <h3 class="transport__title"><span class="transport__ico" aria-hidden="true">🚗</span>자가용 · 주차</h3>
+        <p>호텔 주차장 <span class="tnum">1,300</span>대 무료 주차</p>
+        <p class="transport__sub">네비게이션 검색: “전주 더메이 호텔” 또는 “기린대로 800”</p>
+        <p class="transport__sub">차량이 몰리는 시간대에는<br>현장 안내에 따라 주시기 바랍니다.</p>
+        <!-- PLACEHOLDER: 무료 주차 '시간 제한'과 발렛 운영 여부는 여전히 미확인이다.
+             1,300대 무료만 확인된 사실이므로 시간 제한 문구를 덧붙이지 말 것. -->
+      </div>
+
+      <div class="transport__item reveal" style="--i:2">
+        <h3 class="transport__title"><span class="transport__ico" aria-hidden="true">🚕</span>택시</h3>
+        <p>전주역에서 약 <span class="tnum">20</span>분<br>전주고속버스터미널에서 약 <span class="tnum">15</span>분</p>
+      </div>
+
+      <div class="transport__item reveal" style="--i:3">
+        <h3 class="transport__title"><span class="transport__ico" aria-hidden="true">🚄</span>기차 · 고속버스</h3>
+        <p>KTX 전주역 하차<br>전주고속버스터미널 하차</p>
+        <p class="transport__sub">역·터미널에서 택시 또는 버스로 이동하실 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <img class="divider reveal reveal--x" src="images/divider-floral-1.png" alt="" aria-hidden="true" width="1600" height="500" loading="lazy" decoding="async">
+
+
+  <!-- ══ 7. ACCOUNT ══════════════════════════════════════════════════════ -->
+  <section class="section section--tint account" aria-labelledby="account-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="account-head">THANKS TO</h2>
+      <p class="sec-head__ko">마음 전하실 곳</p>
+    </header>
+
+    <div class="account__message reveal" style="--i:1">
+      <p>직접 찾아뵙고 인사드리는 것이<br>마땅한 도리이오나,</p>
+      <p>참석이 어려우신 분들을 위해<br>부득이 마음 전하실 곳을<br>따로 안내드립니다.</p>
+      <p>너그러운 마음으로 양해해 주시고,<br>전해 주시는 따뜻한 마음은<br>오래 간직하겠습니다.</p>
+    </div>
+
+    <!-- ── PLACEHOLDER 블록 ──────────────────────────────────────────────
+         아래 6개 슬롯의 data-copy 값은 전부 placeholder다.
+         · 실제 계좌를 넣을 때: data-copy="국민은행 123456-78-901234" 형태로 교체하면
+           스크립트가 자동으로 복사 버튼을 활성화하고 라벨을 '복사'로 바꾼다.
+         · 사용하지 않을 슬롯은 <li> 행 전체를 삭제한다 (빈 칸 노출 금지).
+         · 카카오페이 송금 버튼은 URL 미제공으로 넣지 않았다.
+    ────────────────────────────────────────────────────────────────── -->
+    <div class="acc reveal" style="--i:2">
+      <h3 class="acc__h">
+        <button class="acc__btn" type="button" id="acc-groom-btn" aria-expanded="false" aria-controls="acc-groom">
+          <span>신랑측 계좌번호</span>
+          <svg class="acc__chev" viewBox="0 0 16 10" width="14" height="9" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l7 7 7-7"></path></svg>
+        </button>
+      </h3>
+      <div class="acc__panel" id="acc-groom" role="region" aria-labelledby="acc-groom-btn">
+        <div class="acc__inner">
+          <ul class="acc-list">
+            <li>
+              <div class="acc-list__info"><p class="acc-list__role">신랑</p><p class="acc-list__name">장재준</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+            </li>
+            <li>
+              <div class="acc-list__info"><p class="acc-list__role">아버지</p><p class="acc-list__name">장영일</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+            </li>
+            <li>
+              <div class="acc-list__info"><p class="acc-list__role">어머니</p><p class="acc-list__name">손순화</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc reveal" style="--i:3">
+      <h3 class="acc__h">
+        <button class="acc__btn" type="button" id="acc-bride-btn" aria-expanded="false" aria-controls="acc-bride">
+          <span>신부측 계좌번호</span>
+          <svg class="acc__chev" viewBox="0 0 16 10" width="14" height="9" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l7 7 7-7"></path></svg>
+        </button>
+      </h3>
+      <div class="acc__panel" id="acc-bride" role="region" aria-labelledby="acc-bride-btn">
+        <div class="acc__inner">
+          <ul class="acc-list">
+            <li>
+              <div class="acc-list__info"><p class="acc-list__role">신부</p><p class="acc-list__name">심혜은</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+            </li>
+            <li>
+              <div class="acc-list__info"><p class="acc-list__role">아버지</p><p class="acc-list__name">심봉섭</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+            </li>
+            <li>
+              <div class="acc-list__info"><p class="acc-list__role">어머니</p><p class="acc-list__name">민경란</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ 8. RSVP ═════════════════════════════════════════════════════════ -->
+  <section class="section rsvp" aria-labelledby="rsvp-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="rsvp-head">RSVP</h2>
+      <p class="sec-head__ko">참석 여부 전달</p>
+    </header>
+
+    <div class="rsvp__card reveal" style="--i:1">
+      <p>참석 여부를 미리 알려주시면<br>자리를 준비하는 데 큰 도움이 됩니다.</p>
+      <p>귀한 시간 내어 주시는 모든 분들께<br>미리 감사드립니다.</p>
+    </div>
+
+    <!-- 임베드 → 링크 방식 전환 (4차 사용자 피드백: "링크를 타고 들어가게 하면 깔끔할듯").
+         페이지 내 임베드 프레임과 높이 예약을 제거하고 버튼 하나로 새 탭 이동한다.
+         · 임베드 전제로 쓰인 카피(`아래에서 바로…`, `폼이 보이지 않으시면…`)는 링크 방식에서
+           사실과 어긋나므로 함께 제거했다. 새 문구를 지어내지 않았다.
+         · `data-ext-url` 핸들러가 외부링크 아이콘과 `(새 창에서 열립니다)` aria-label 을
+           자동으로 주입한다(모션 명세 §3-7-A). -->
+    <button class="btn btn--primary btn--wide reveal" style="--i:2" type="button"
+            data-ext-url="https://docs.google.com/forms/d/e/1FAIpQLSdhmHBQ8k69SmBTReMBEHW8KSFNEUiM7J7hg7I-9ZBWQBO0vg/viewform"
+            data-label-ready="참석 여부 전하기" aria-label="참석 여부 전하기">참석 여부 전하기</button>
+    <!-- PLACEHOLDER(선택): 회신 기한 `[○월 ○일]까지 회신해 주시면 감사하겠습니다.`
+         — 기한 미확정이므로 노출하지 않는다. -->
+  </section>
+
+
+  <!-- 방명록이 숨겨지면 이 디바이더도 함께 숨긴다 (모션 명세 §3-10-A) -->
+  <img class="divider reveal reveal--x" id="divider-guestbook" src="images/divider-floral-1.png" alt="" aria-hidden="true" width="1600" height="500" loading="lazy" decoding="async">
+
+
+  <!-- ══ 9. GUESTBOOK ════════════════════════════════════════════════════
+       Firebase 설정이 placeholder 인 동안 스크립트가 이 섹션에 hidden 을 건다.
+       기본 상태를 hidden 으로 두어 JS 로드 전 깜빡임(FOUC)도 없앴다.
+       삭제 기능은 미구현(옵션 A) — 컨셉 시트 "비밀번호 기반 삭제는 범위 밖" 준수.
+       따라서 비밀번호 필드·삭제 버튼·삭제 관련 토스트를 렌더링하지 않는다.       -->
+  <section class="section section--tint guestbook" id="guestbook" aria-labelledby="guestbook-head" hidden>
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="guestbook-head">GUEST BOOK</h2>
+      <p class="sec-head__ko">방명록</p>
+    </header>
+
+    <div class="guestbook__lead reveal" style="--i:1">
+      <p>두 사람에게 전하고 싶은 말씀을<br>이곳에 남겨 주세요.</p>
+      <p>주신 한마디 한마디<br>오래도록 간직하겠습니다.</p>
+    </div>
+
+    <form class="gb-form reveal" style="--i:2" id="gb-form" novalidate>
+      <div class="gb-field">
+        <label class="gb-label" for="gb-name">성함</label>
+        <input class="gb-input" id="gb-name" name="name" type="text" maxlength="10"
+               autocomplete="name" placeholder="성함을 입력해 주세요" required
+               aria-describedby="gb-name-err">
+        <p class="gb-err" id="gb-name-err" hidden></p>
+      </div>
+
+      <div class="gb-field">
+        <label class="gb-label" for="gb-message">축하 메시지</label>
+        <textarea class="gb-input gb-textarea" id="gb-message" name="message" rows="4" maxlength="200"
+                  placeholder="축하의 마음을 남겨 주세요" required
+                  aria-describedby="gb-count gb-message-err"></textarea>
+        <p class="gb-count num" id="gb-count"><span data-gb-count>0</span> / 200</p>
+        <p class="gb-err" id="gb-message-err" hidden></p>
+      </div>
+
+      <p class="gb-hint">성함 10자, 메시지 200자까지 입력하실 수 있습니다.</p>
+      <button class="btn btn--primary btn--wide" type="submit" id="gb-submit">축하 메시지 남기기</button>
+    </form>
+
+    <div class="gb-list-wrap reveal" style="--i:3">
+      <p class="gb-status" id="gb-status">방명록을 불러오는 중입니다.</p>
+      <ul class="gb-list" id="gb-list"></ul>
+      <button class="btn gb-more" type="button" id="gb-more" hidden>메시지 더 보기</button>
+      <button class="btn gb-retry" type="button" id="gb-retry" hidden>다시 시도</button>
+    </div>
+  </section>
+
+
+  <!-- ══ 10. PHOTO ALBUM ═════════════════════════════════════════════════ -->
+  <section class="section photo-album" aria-labelledby="album-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="album-head">PHOTO ALBUM</h2>
+      <p class="sec-head__ko">하객 사진 공유</p>
+    </header>
+
+    <div class="album__message reveal" style="--i:1">
+      <p>예식에서 담아 주신 사진을<br>이곳에 함께 모으고 있습니다.</p>
+      <p>여러분의 시선에 남은 하루가<br>저희에게 가장 귀한 선물이 됩니다.</p>
+      <!-- 3연은 '제한'이 아니라 '권장'이다. 구글 포토 공유 앨범은 참여자별 업로드 수를
+           기술적으로 강제할 수 없으므로 청유·감사형으로만 쓴다(카피 rev.4).
+           `제한`·`최대`·`초과 시` 같은 강제·경고형 단어를 넣지 말 것. -->
+      <p class="album__guide">모두의 사진이 잘 담기도록<br>한 분당 열 장 내외로,<br>동영상보다는 사진 위주로<br>올려 주시면 감사하겠습니다.</p>
+    </div>
+
+    <button class="btn btn--primary btn--wide reveal" style="--i:2" type="button"
+            data-ext-url="https://photos.app.goo.gl/2JBUnrVaG8kpg6Cw8" data-label-ready="사진 올리러 가기"
+            aria-label="사진 올리러 가기">사진 올리러 가기</button>
+
+    <p class="album__note reveal" style="--i:2">구글 포토 공유 앨범으로 이동합니다.<br>올려 주신 사진은 저희에게 그대로 전달됩니다.<br>사진은 예식 당일이 아니어도 언제든 올려 주셔도 됩니다.</p>
+    <!-- 카피 rev.4의 선택 문구 "구글 계정 없이도 링크로 바로 올리실 수 있습니다." 는
+         앨범의 '링크가 있는 사용자 추가 허용' 설정을 확인하지 못해 넣지 않았다.
+         설정을 확인한 뒤에만 추가할 것 — 안 되는데 된다고 적으면 하객이 막힌다. -->
+  </section>
+
+
+  <!-- ══ 11. SHARE ═══════════════════════════════════════════════════════ -->
+  <section class="section section--tint share" aria-labelledby="share-head">
+    <header class="sec-head reveal" style="--i:0">
+      <h2 class="sec-head__en" id="share-head">SHARE</h2>
+      <p class="sec-head__ko">청첩장 공유하기</p>
+    </header>
+
+    <p class="share__lead reveal" style="--i:0">저희의 소식을<br>가까운 분들께도 전해 주세요.</p>
+
+    <div class="share__actions">
+      <button class="btn btn--primary btn--wide reveal" style="--i:1" type="button" id="share-kakao">카카오톡으로 공유하기</button>
+      <button class="btn btn--wide reveal" style="--i:2" type="button" id="share-link" data-toast="청첩장 링크가 복사되었습니다.">링크 복사하기</button>
+    </div>
+    <!-- 카카오 공유 SDK. async 로 로드해 본문 파싱을 막지 않는다.
+         Kakao.init() 은 script.js 의 share 모듈이 첫 클릭 시점에 수행하므로
+         SDK 가 차단되어도 ReferenceError 없이 navigator.share → 링크 복사로 폴백한다.
+         ⚠ 카카오 개발자 콘솔 [내 애플리케이션 → 플랫폼 → Web]에 배포 도메인을
+           등록해야 공유가 동작한다(미등록 시 자동 폴백). -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous" async></script>
+  </section>
+
+
+  <!-- ══ 12. FOOTER ══════════════════════════════════════════════════════ -->
+  <footer class="section footer">
+    <figure class="photo-cut reveal reveal--fade" style="--i:0">
+      <img src="images/photos/moment-closing.jpg"
+           alt="웜 골든 톤 창가에서 꽃다발을 함께 들고 환하게 웃는 신랑과 신부"
+           width="640" height="960" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="footer__msg reveal" style="--i:1">
+      <p>귀한 걸음으로 축복해 주신<br>모든 분들께 깊이 감사드립니다.</p>
+      <p>오늘 받은 마음 오래 기억하며<br>서로 아끼고 의지하며<br>살아가겠습니다.</p>
+    </div>
+
+    <p class="footer__sign reveal" style="--i:1">Jaejun Jang<br>&amp; Hyeeun Shim</p>
+    <p class="footer__date num reveal" style="--i:2">2026 . 10 . 31</p>
+    <p class="footer__copy reveal" style="--i:2">© 2026 Jaejun Jang &amp; Hyeeun Shim. All rights reserved.</p>
+
+    <button class="to-top" type="button" id="to-top" aria-label="맨 위로 이동">
+      <svg viewBox="0 0 16 10" width="14" height="9" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 9l7-7 7 7"></path></svg>
+    </button>
+  </footer>
+
+</main>
+
+<!-- ══ LIGHTBOX (모션 명세 §3-3) ═══════════════════════════════════════════ -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기" hidden>
+  <div class="lightbox__stage" id="lightbox-stage">
+    <img class="lightbox__img" id="lightbox-img" alt="" draggable="false">
+  </div>
+  <button class="lightbox__close" type="button" id="lightbox-close" aria-label="사진 닫기">
+    <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16"></path></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--prev" type="button" id="lightbox-prev" aria-label="이전 사진">
+    <svg viewBox="0 0 12 20" width="12" height="20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 1L2 10l8 9"></path></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--next" type="button" id="lightbox-next" aria-label="다음 사진">
+    <svg viewBox="0 0 12 20" width="12" height="20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 1l8 9-8 9"></path></svg>
+  </button>
+  <p class="lightbox__counter num" aria-hidden="true"><span data-lb-current>1</span> / <span data-lb-total>15</span></p>
+</div>
+
+<!-- ══ TOAST (공용) ════════════════════════════════════════════════════════ -->
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
