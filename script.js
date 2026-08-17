@@ -764,60 +764,9 @@
     });
   });
 
-  /* ── 11. 공유 (§3-9) ──────────────────────────────────────────────────── */
-  (function share() {
-    var SHARE_TITLE = '장재준 ♥ 심혜은 결혼합니다';
-    var SHARE_DESC = '2026년 10월 31일 토요일 오후 1시 20분 · 전주 더메이 호텔 그랜드볼룸';
-    // 카카오 JavaScript 키 (지도 SDK와 동일한 키를 공유한다)
-    var KAKAO_JS_KEY = '1408e0961d10a6e184b5f161631d8ee1';
-
-    /* SDK 는 async 로드이므로 초기화를 클릭 시점까지 늦춘다.
-       SDK 가 차단·미등록이면 false 를 반환하고 아래 폴백 체인으로 넘어간다. */
-    function kakaoReady() {
-      try {
-        if (!window.Kakao || !window.Kakao.Share) return false;
-        if (!window.Kakao.isInitialized()) window.Kakao.init(KAKAO_JS_KEY);
-        return window.Kakao.isInitialized();
-      } catch (e) { return false; }
-    }
-
-    function copyLink(msg) {
-      copyText(location.href).then(function () {
-        toast(msg || '청첩장 링크가 복사되었습니다.');
-        buzz(10);
-      })['catch'](function () { toast('복사에 실패했습니다. 길게 눌러 직접 복사해 주세요.'); });
-    }
-
-    var linkBtn = $('#share-link');
-    if (linkBtn) linkBtn.addEventListener('click', function () { copyLink(linkBtn.getAttribute('data-toast')); });
-
-    var kakaoBtn = $('#share-kakao');
-    if (kakaoBtn) kakaoBtn.addEventListener('click', function () {
-      buzz(10);
-      // 1순위: 카카오 JS SDK → 2순위: 웹 공유 → 3순위: 링크 복사
-      try {
-        if (kakaoReady()) {
-          window.Kakao.Share.sendDefault({
-            objectType: 'feed',
-            content: {
-              title: SHARE_TITLE,
-              description: SHARE_DESC,
-              /* ?v= 는 카카오 OG 캐시 무효화용 — 사진 교체 시 값을 갱신할 것 */
-              imageUrl: new URL('images/photos/og-cover.jpg?v=20260817', location.href).href,
-              link: { mobileWebUrl: location.href, webUrl: location.href }
-            },
-            buttons: [{ title: '청첩장 보기', link: { mobileWebUrl: location.href, webUrl: location.href } }]
-          });
-          return;
-        }
-      } catch (e) {}
-      if (navigator.share) {
-        navigator.share({ title: SHARE_TITLE, text: SHARE_DESC, url: location.href })['catch'](function () {});
-        return;
-      }
-      copyLink();
-    });
-  })();
+  /* ── 11. 공유 (§3-9) — 2026-08-17 사용자 지시로 SHARE 섹션과 함께 삭제됨.
+     부활 시 참고: 카톡 공유 미리보기 이미지는 og:image 메타(?v= 캐시버스트)가
+     담당하므로 이 삭제와 무관하게 계속 동작한다. ─────────────────────────── */
 
   /* ── 12. 맨 위로 ──────────────────────────────────────────────────────── */
   (function toTop() {

@@ -534,29 +534,11 @@
   </section>
 
 
-  <!-- ══ 11. SHARE ═══════════════════════════════════════════════════════ -->
-  <section class="section section--tint share" aria-labelledby="share-head">
-    <header class="sec-head reveal" style="--i:0">
-      <h2 class="sec-head__en" id="share-head">SHARE</h2>
-      <p class="sec-head__ko">청첩장 공유하기</p>
-    </header>
+  <!-- SHARE(청첩장 공유하기) 섹션과 카카오 공유 SDK 는 2026-08-17 사용자 지시로
+       통째로 삭제했다. 부활시키지 말 것 — 공유는 하객이 브라우저 공유 기능이나
+       카카오톡 링크 전달로 자연히 해결된다. 지도용 SDK(dapi.kakao.com)와는 무관. -->
 
-    <p class="share__lead reveal" style="--i:0">저희의 소식을<br>가까운 분들께도 전해 주세요.</p>
-
-    <div class="share__actions">
-      <button class="btn btn--primary btn--wide reveal" style="--i:1" type="button" id="share-kakao">카카오톡으로 공유하기</button>
-      <button class="btn btn--wide reveal" style="--i:2" type="button" id="share-link" data-toast="청첩장 링크가 복사되었습니다.">링크 복사하기</button>
-    </div>
-    <!-- 카카오 공유 SDK. async 로 로드해 본문 파싱을 막지 않는다.
-         Kakao.init() 은 script.js 의 share 모듈이 첫 클릭 시점에 수행하므로
-         SDK 가 차단되어도 ReferenceError 없이 navigator.share → 링크 복사로 폴백한다.
-         ⚠ 카카오 개발자 콘솔 [내 애플리케이션 → 플랫폼 → Web]에 배포 도메인을
-           등록해야 공유가 동작한다(미등록 시 자동 폴백). -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous" async></script>
-  </section>
-
-
-  <!-- ══ 12. FOOTER ══════════════════════════════════════════════════════ -->
+  <!-- ══ 11. FOOTER ══════════════════════════════════════════════════════ -->
   <footer class="section footer">
     <figure class="photo-cut reveal reveal--fade" style="--i:0">
       <img src="images/photos/moment-closing.jpg"

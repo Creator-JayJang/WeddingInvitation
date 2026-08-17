@@ -876,9 +876,7 @@ body{
   font-size: var(--fs-caption); line-height: 1.8; color: var(--muted);
 }
 
-/* ══ 11. SHARE ═══════════════════════════════════════════════════════════ */
-.share__lead{ margin-bottom: 28px; font-size: var(--fs-body); line-height: 1.95; }
-.share__actions{ display: flex; flex-direction: column; gap: 10px; align-items: center; }
+/* SHARE 섹션 규칙은 2026-08-17 섹션 삭제와 함께 제거됐다. */
 
 /* ══ 12. FOOTER ══════════════════════════════════════════════════════════ */
 .footer{ padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
