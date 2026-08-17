@@ -828,26 +828,35 @@
     });
   })();
 
-  /* ── 13. 지도 임베드 (venue) ──────────────────────────────────────────────
-     2026-08-17 교체: 카카오맵 JS SDK 는 개발자 콘솔에 배포 도메인이 등록돼야
-     로드되는데, 미등록 상태로 라이브에서 안내 카드만 남았다. 키·콘솔 등록 없이
-     동작하는 구글 지도 임베드(iframe)로 대체한다.
-     · src 는 venue 섹션이 화면에 가까워질 때만 data-src 에서 주입한다(로드 예산 보호).
-     · load 이벤트가 온 뒤에만 지도를 드러내고 잠금 해제 버튼을 노출한다.
-       실패하면 안내 카드와 지도 앱 버튼이 그대로 남는다 — 토스트·에러 문구 없음(§3-6-B).
-     · 스크롤 트랩 방지: iframe 은 CSS pointer-events:none 으로 시작하고,
-       잠금 해제 버튼 탭 이후에만 조작이 열린다(1회성, 재잠금 없음).              */
-  (function mapEmbed() {
+  /* ── 13. 지도 (venue) — 카카오맵 1순위, 구글 임베드 폴백 ──────────────────
+     2026-08-17 확정: 사용자 우선순위는 네이버 > 카카오였으나, 네이버 지도는 전
+     경로가 X-Frame-Options: DENY 라 iframe 삽입이 불가하고 JS API 는 NCP 키·도메인
+     등록이 필요해 제외했다(실측). 체인:
+       1) 카카오맵 JS SDK — developers.kakao.com 콘솔의 Web 플랫폼에
+          https://creator-jayjang.github.io 가 등록돼 있어야 로드된다.
+       2) 실패(미등록·차단·3초 무응답·지오코딩 실패) 시 구글 지도 임베드(iframe,
+          키 불필요)를 data-src 에서 주입한다.
+       3) 둘 다 실패하면 안내 카드가 그대로 남는다 — 토스트·에러 문구 없음(§3-6-B).
+     · 로드는 venue 섹션이 화면에 가까워질 때만 시작한다(초기 로드 예산 보호).
+     · 스크롤 트랩 방지: 카카오맵은 draggable:false, 구글 iframe 은 CSS
+       pointer-events:none 으로 시작 — 잠금 해제 버튼 탭 후에만 열린다(1회성).    */
+  (function venueMap() {
+    var KAKAO_JS_KEY = '1408e0961d10a6e184b5f161631d8ee1';
+    var ADDRESS = '전북 전주시 덕진구 기린대로 800';
+    var PLACE = '전주 더메이 호텔';
+
     var frame = $('#map-frame');
+    var box = $('#map');
     var iframe = $('#map-embed');
     var fallback = $('#map-fallback');
     var unlock = $('#map-unlock');
-    if (!frame || !iframe) return;
+    if (!frame || (!box && !iframe)) return;
 
-    var started = false;
+    var started = false, settled = false, kakaoMapObj = null;
 
-    function succeed() {
-      frame.classList.add('is-live');
+    function reveal(cls) {
+      settled = true;
+      frame.classList.add(cls);
       if (fallback) fallback.hidden = true;
       if (unlock) unlock.hidden = false;   // 지도가 실제로 떴을 때만 잠금 해제 버튼을 노출
     }
@@ -855,19 +864,76 @@
     /* 오버레이 탭 → 확대·이동 개방. 1회성이며 재잠금은 없다. */
     if (unlock) {
       unlock.addEventListener('click', function () {
-        frame.classList.add('is-unlocked');
+        if (kakaoMapObj) { try { kakaoMapObj.setDraggable(true); kakaoMapObj.setZoomable(true); } catch (e) {} }
+        frame.classList.add('is-unlocked');       // 구글 iframe pointer-events 개방
         unlock.hidden = true;
         buzz(10);
       }, { once: true });
     }
 
+    /* 2순위: 구글 임베드. load 는 응답이 실제로 왔을 때만 발화하므로
+       네트워크 실패·차단 시에는 안내 카드가 그대로 남는다. */
+    function fallbackGoogle() {
+      if (settled || !iframe || iframe.src) return;
+      iframe.addEventListener('load', function () { if (!settled) reveal('is-google'); }, { once: true });
+      iframe.src = iframe.getAttribute('data-src');
+    }
+
+    function renderKakao() {
+      try {
+        var kakao = window.kakao;
+        if (!kakao || !kakao.maps || !kakao.maps.services) { fallbackGoogle(); return; }
+
+        /* 초기에는 지도를 잠근 상태로 둔다 — draggable 기본값이 true 라서
+           명시하지 않으면 지도가 페이지 세로 스크롤을 삼킨다(모바일 필수 항목). */
+        var map = new kakao.maps.Map(box, {
+          center: new kakao.maps.LatLng(35.8398, 127.1178),   // 해석 전 임시 중심(전주 시가지)
+          level: 4,
+          draggable: false,
+          scrollwheel: false
+        });
+        map.setZoomable(false);
+
+        new kakao.maps.services.Geocoder().addressSearch(ADDRESS, function (result, status) {
+          if (settled) return;
+          if (status !== kakao.maps.services.Status.OK || !result || !result[0]) {
+            fallbackGoogle();          // 주소 해석 실패 → 구글 임베드로
+            return;
+          }
+          var pos = new kakao.maps.LatLng(result[0].y, result[0].x);
+          map.setCenter(pos);
+          var marker = new kakao.maps.Marker({ position: pos, map: map });
+          new kakao.maps.InfoWindow({
+            position: pos,
+            content: '<div class="map-info">' + PLACE + '</div>'
+          }).open(map, marker);
+          kakao.maps.event.addListener(map, 'idle', function () { map.relayout(); });
+          kakaoMapObj = map;
+          reveal('is-kakao');
+        });
+      } catch (e) { fallbackGoogle(); }
+    }
+
     function load() {
       if (started) return;
       started = true;
-      /* load 는 응답이 실제로 왔을 때만 발화한다 — 네트워크 실패·차단 시에는
-         발화하지 않으므로 별도 giveUp 없이 안내 카드가 그대로 남는다. */
-      iframe.addEventListener('load', succeed, { once: true });
-      iframe.src = iframe.getAttribute('data-src');
+      if (!box) { fallbackGoogle(); return; }
+
+      var sc = document.createElement('script');
+      sc.async = true;
+      sc.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=' + KAKAO_JS_KEY +
+               '&libraries=services&autoload=false';
+      sc.onerror = fallbackGoogle;     // 네트워크 실패·도메인 미등록 등
+      sc.onload = function () {
+        try {
+          if (window.kakao && window.kakao.maps && window.kakao.maps.load) {
+            window.kakao.maps.load(renderKakao);
+          } else { fallbackGoogle(); }
+        } catch (e) { fallbackGoogle(); }
+      };
+      document.head.appendChild(sc);
+
+      setTimeout(function () { if (!settled) fallbackGoogle(); }, 3000);   // 무응답 상한(§3-6-B)
     }
 
     if ('IntersectionObserver' in window) {
