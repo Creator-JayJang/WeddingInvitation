@@ -367,11 +367,9 @@
       <p>너그러운 마음으로 양해해 주시고,<br>전해 주시는 따뜻한 마음은<br>오래 간직하겠습니다.</p>
     </div>
 
-    <!-- ── PLACEHOLDER 블록 ──────────────────────────────────────────────
-         아래 6개 슬롯의 data-copy 값은 전부 placeholder다.
-         · 실제 계좌를 넣을 때: data-copy="국민은행 123456-78-901234" 형태로 교체하면
-           스크립트가 자동으로 복사 버튼을 활성화하고 라벨을 '복사'로 바꾼다.
-         · 사용하지 않을 슬롯은 <li> 행 전체를 삭제한다 (빈 칸 노출 금지).
+    <!-- ── 계좌 6건 확정 (2026-08-21 사용자 제공) ────────────────────────
+         · 표기 양식 통일: "은행명 계좌번호(하이픈)" — data-copy와 화면 표기 동일.
+         · 계좌번호 자릿수 구분은 사용자가 제공한 그대로이며 임의 재조합 금지.
          · 카카오페이 송금 버튼은 URL 미제공으로 넣지 않았다.
     ────────────────────────────────────────────────────────────────── -->
     <div class="acc reveal" style="--i:2">
@@ -385,16 +383,16 @@
         <div class="acc__inner">
           <ul class="acc-list">
             <li>
-              <div class="acc-list__info"><p class="acc-list__role">신랑</p><p class="acc-list__name">장재준</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
-              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+              <div class="acc-list__info"><p class="acc-list__role">신랑</p><p class="acc-list__name">장재준</p><p class="acc-list__num tnum">카카오뱅크 3333-15-5858826</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="카카오뱅크 3333-15-5858826" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사">복사</button>
             </li>
             <li>
-              <div class="acc-list__info"><p class="acc-list__role">아버지</p><p class="acc-list__name">장영일</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
-              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+              <div class="acc-list__info"><p class="acc-list__role">아버지</p><p class="acc-list__name">장영일</p><p class="acc-list__num tnum">농협 352-9722-9075-93</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="농협 352-9722-9075-93" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사">복사</button>
             </li>
             <li>
-              <div class="acc-list__info"><p class="acc-list__role">어머니</p><p class="acc-list__name">손순화</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
-              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+              <div class="acc-list__info"><p class="acc-list__role">어머니</p><p class="acc-list__name">손순화</p><p class="acc-list__num tnum">신한 110-504-582910</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="신한 110-504-582910" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사">복사</button>
             </li>
           </ul>
         </div>
@@ -412,16 +410,16 @@
         <div class="acc__inner">
           <ul class="acc-list">
             <li>
-              <div class="acc-list__info"><p class="acc-list__role">신부</p><p class="acc-list__name">심혜은</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
-              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+              <div class="acc-list__info"><p class="acc-list__role">신부</p><p class="acc-list__name">심혜은</p><p class="acc-list__num tnum">기업 047-085733-01-013</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="기업 047-085733-01-013" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사">복사</button>
             </li>
             <li>
-              <div class="acc-list__info"><p class="acc-list__role">아버지</p><p class="acc-list__name">심봉섭</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
-              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+              <div class="acc-list__info"><p class="acc-list__role">아버지</p><p class="acc-list__name">심봉섭</p><p class="acc-list__num tnum">농협 345-02-037794</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="농협 345-02-037794" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사">복사</button>
             </li>
             <li>
-              <div class="acc-list__info"><p class="acc-list__role">어머니</p><p class="acc-list__name">민경란</p><p class="acc-list__num tnum">[○○은행 000-0000-0000]</p></div>
-              <button class="btn btn--sm btn-copy" type="button" data-copy="[○○은행 000-0000-0000]" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사" disabled aria-disabled="true">준비 중</button>
+              <div class="acc-list__info"><p class="acc-list__role">어머니</p><p class="acc-list__name">민경란</p><p class="acc-list__num tnum">농협 345-12218264</p></div>
+              <button class="btn btn--sm btn-copy" type="button" data-copy="농협 345-12218264" data-toast="계좌번호가 복사되었습니다." data-label-ready="복사">복사</button>
             </li>
           </ul>
         </div>
