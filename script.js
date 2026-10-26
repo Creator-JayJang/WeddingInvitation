@@ -32,92 +32,6 @@
     setTimeout(function () { el.textContent = v; }, Math.round((dur || 240) * 0.42));
   }
 
-  /* ── 0-A. 첫 진입 안내 팝업 (모션 명세 rev.5 §3-11) ─────────────────────
-     다른 모듈보다 먼저 실행한다 — §9 BGM 의 #bgm-tip 이 html.notice-open 상태를 참조한다.
-     · 매 로드 표시, 저장소 사용 없음(localStorage·sessionStorage·쿠키 0). pushState 미사용.
-     · 마크업 기본 hidden → 여기서만 연다(스크립트 실패 시 팝업이 뜨지 않는다).
-     · ★ audio 를 직접 다루지 않는다. 닫기·백드롭 핸들러에서 stopPropagation·preventDefault
-       금지 — X 탭이 window 까지 버블링되어 §9 BGM 첫 인터랙션 폴백을 그대로 발화해야 한다.
-     · 히어로 진입 시퀀스(§4)와 연동하지 않는다 — 팝업 뒤에서 그대로 진행된다. */
-  (function notice() {
-    var el = document.getElementById('notice');
-    var closeBtn = el && el.querySelector('.notice__close');
-    if (!el || !closeBtn) return;
-
-    var NOTICE_OUT = 400;    // = --dur-base (백드롭 퇴장)
-    var NOTICE_GRACE = 500;  // = --stagger + --dur-base (등장 정착 — 백드롭 탭 유예)
-    var root = document.documentElement;
-    var isOpen = false, openedAt = 0, prevFocus = null, downOnBackdrop = false;
-
-    function reducedNow() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-    function setInert(on) {   // #toast 는 제외(live region 낭독 유지), #lightbox 는 hidden 이라 대상 아님
-      [document.getElementById('bgm-toggle'), document.querySelector('main')]
-        .forEach(function (n) { if (n) n.inert = on; });
-    }
-
-    function open() {
-      prevFocus = document.activeElement;
-      el.hidden = false;
-      root.classList.add('notice-open');               // 스크롤 잠금 + 상태 플래그
-      setInert(true);
-      closeBtn.focus({ preventScroll: true });         // 열릴 때 닫기 버튼으로 포커스
-      document.addEventListener('keydown', onKey);
-      isOpen = true; openedAt = performance.now();
-      if (reducedNow()) { el.classList.add('is-open'); return; }   // 감속: 즉시 표시
-      /* double rAF — hidden 해제와 .is-open 이 같은 스타일 계산에 묶이면 트랜지션이 생략된다 */
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { if (isOpen) el.classList.add('is-open'); });
-      });
-    }
-
-    function close(e) {
-      if (!isOpen) return;
-      isOpen = false;
-      document.removeEventListener('keydown', onKey);
-      setInert(false);                                 // ① inert 해제 — 포커스 이동보다 반드시 먼저
-      root.classList.remove('notice-open');            // ② 잠금 해제 — 닫는 즉시 스크롤 가능
-      /* ③ 포커스 복귀 — QA rev.6 F1: 포인터 클릭·탭(click.detail > 0)으로 닫으면 링을 숨기고,
-         ESC·X 의 Enter/Space(detail 0)로 닫으면 링을 유지한다(키보드 사용자 접근성) */
-      restoreFocus(!!(e && e.type === 'click' && e.detail > 0));
-      el.classList.remove('is-open');
-      el.classList.add('is-closing');                  // ④ 퇴장 모션 (transitionend 대신 duration 기반)
-      var done = function () { el.hidden = true; el.classList.remove('is-closing'); };
-      if (reducedNow()) done(); else setTimeout(done, NOTICE_OUT);  // 감속: 즉시 숨김
-      document.dispatchEvent(new CustomEvent('notice:closed'));
-    }
-
-    function restoreFocus(byPointer) {
-      var t = (prevFocus && prevFocus !== document.body &&
-               document.contains(prevFocus) && !el.contains(prevFocus))
-        ? prevFocus
-        : document.querySelector('.hero__names');      // tabindex="-1" — 청첩장 표제(신랑·신부 이름)
-      if (!t) return;
-      /* Chromium 은 이 흐름의 스크립트 focus() 를 :focus-visible 로 판정하므로
-         :focus:not(:focus-visible) 만으로는 링이 남는다 → 모달리티를 명시한다.
-         focusVisible:false 미지원 WebView 는 .is-quiet-focus 클래스(blur 시 제거)로 보강 */
-      if (byPointer) {
-        t.classList.add('is-quiet-focus');
-        t.addEventListener('blur', function () { t.classList.remove('is-quiet-focus'); }, { once: true });
-      }
-      t.focus(byPointer ? { preventScroll: true, focusVisible: false } : { preventScroll: true });
-    }
-
-    function onKey(e) {
-      if (e.key === 'Escape') { close(); return; }
-      if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }   // 포커스 가능 요소가 X 하나뿐
-    }
-
-    closeBtn.addEventListener('click', close);         // ★ stopPropagation·preventDefault 금지 (§3-11-H BGM)
-    el.addEventListener('pointerdown', function (e) { downOnBackdrop = (e.target === el); }, { passive: true });
-    el.addEventListener('click', function (e) {
-      if (e.target !== el || !downOnBackdrop) return;            // 가드 1: 시작·끝 모두 백드롭
-      if (performance.now() - openedAt < NOTICE_GRACE) return;   // 가드 2: 등장 중 오탭
-      close(e);                                                  // 포인터 닫기 판정용 이벤트 전달 (F1)
-    });
-
-    open();
-  })();
-
   /* ── 1. 토스트 (§3-5, 공용) ───────────────────────────────────────────── */
   var toastEl = $('#toast');
   var toastTimer = null;
@@ -765,16 +679,7 @@
         window.addEventListener(t, onFirstGesture, { once: true, passive: true });
       });
     }
-    function onFirstGesture(e) {
-      /* QA rev.6 F2: 터치의 사용자 활성화는 pointerup/touchend 에서 생긴다. 활성화 없는 이벤트
-         (터치 pointerdown·touchstart·scroll·Escape keydown)의 play() 는 반드시 거절되어 재시도
-         예산을 헛되이 소진한다 → 발화한 리스너 1개만 재등록하고 예산을 쓰지 않고 돌아간다.
-         같은 탭의 click(활성화 이후)에서 재생된다. navigator.userActivation 미지원 환경은 기존 동작. */
-      var ua = navigator.userActivation;
-      if (ua && !ua.isActive && e && e.type) {
-        window.addEventListener(e.type, onFirstGesture, { once: true, passive: true });
-        return;
-      }
+    function onFirstGesture() {
       // once:true 는 발화한 1개만 해제한다 — 나머지 4개는 수동 해제가 필수
       disarm();
       if (userOptedOut) return;
@@ -821,16 +726,13 @@
       try { audio.preload = 'auto'; } catch (e) {}
     }, { once: true });
 
-    /* 첫 진입 툴팁 — 1회, 3초 후 소멸
-       rev.5 §3-11-H: 1800ms 타이머의 기준점을 안내 팝업 닫힘(notice:closed)으로 옮긴다.
-       팝업 딤 아래에서 표시·소멸한 뒤 '봤음'으로 기록되어 하객이 한 번도 못 보는 사고 방지.
-       팝업이 열려 있지 않으면(미초기화) 기존 동작 그대로. 문구·표시 시간·저장 키 불변. */
+    /* 첫 진입 툴팁 — 1회, 3초 후 소멸 */
     var tip = $('#bgm-tip');
     if (tip) {
       var seen = false;
       try { seen = sessionStorage.getItem('bgm-tip') === '1'; } catch (e) {}
       if (!seen) {
-        var showTip = function () {
+        setTimeout(function () {
           tip.hidden = false;
           requestAnimationFrame(function () { tip.classList.add('is-in'); });
           setTimeout(function () {
@@ -838,13 +740,7 @@
             setTimeout(function () { tip.hidden = true; }, 400);
           }, 3000);
           try { sessionStorage.setItem('bgm-tip', '1'); } catch (e) {}
-        };
-        var startTip = function () { setTimeout(showTip, 1800); };
-        if (document.documentElement.classList.contains('notice-open')) {
-          document.addEventListener('notice:closed', startTip, { once: true });
-        } else {
-          startTip();
-        }
+        }, 1800);
       }
     }
   })();
